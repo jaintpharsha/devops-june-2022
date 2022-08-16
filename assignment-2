@@ -19,7 +19,7 @@ pipeline {
                         sum=0
                         while [ $i -le 10];do
                         sum=`expr $sum + $i`
-                        i=`expr $i +1`
+                        i=`expr $i + 1`
                         done
                         echo "$sum"
                         '''
