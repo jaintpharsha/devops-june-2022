@@ -5,9 +5,8 @@ pipeline {
                }
     stages {
         script {
-           if (params.BRANCH == 'master')
-        
-          stage('TEST1') {
+           if (params.BRANCH == 'master')   
+             stage('TEST1') {
              agent any
              steps {
                  echo "running this on master or built in node"
