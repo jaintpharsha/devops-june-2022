@@ -21,6 +21,7 @@ pipeline {
                         sum=`expr $sum + $i`
                         i=`expr $i +1`
                         done
+                        echo "$sum"
                         '''
                         echo "starting testing 1 stage"
                         sh '''
