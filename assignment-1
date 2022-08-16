@@ -29,6 +29,7 @@ pipeline {
             }
         }
     } 
+    }
     } else 
          {
            echo " can not run on any branch except master"
