@@ -33,7 +33,7 @@ pipeline {
                 script {
                     if(params.BRANCH == 'master')
                     {    
-                        sh 'echo "starting deploy stage"'
+                        sh 'echo "starting test 2 stage"'
                         sh 'ls > log-deployfile'
                         sh 'sleep 5'   
                     } else {
