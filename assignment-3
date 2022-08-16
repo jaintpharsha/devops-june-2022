@@ -16,7 +16,7 @@ pipeline {
                         sh '''
                             #!/bin/bash 
                             pwd 
-                            ls > log-buildfile
+                            echo "Starting build stage"
                             echo "This is build stage"
                             sleep 5
                         '''              
