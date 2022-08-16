@@ -26,13 +26,10 @@ pipeline {
                echo "running on master or built-in node"
                echo "This is a testing-2 stage"
                 sh 'sleep 5'
-            }
+            } else {
+                 echo "Not successful"
+                 }
         }
     } 
     }
-    } else 
-         {
-           echo " can not run on any branch except master"
-           }
-        }
-}
+    } 
