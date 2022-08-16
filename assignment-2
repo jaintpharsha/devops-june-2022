@@ -4,8 +4,9 @@ pipeline {
     parameters {
         choice(name: 'BRANCH', choices: ['main','master'], description: 'Branches from where to build')
     }
-    stages {
-     parallel {
+    stages {   
+     stage ('Testing') {
+       parallel {       
         stage('Test1') {
             agent any 
             steps {
@@ -44,4 +45,5 @@ pipeline {
         }
         }
         }
+    }
     }
