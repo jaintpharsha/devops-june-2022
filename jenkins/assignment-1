@@ -5,7 +5,7 @@ pipeline {
                }
     stages {
         script {
-           if (params.BRANCH == 'master');then
+           if (params.BRANCH == 'master')
         
           stage('TEST1') {
              agent any
