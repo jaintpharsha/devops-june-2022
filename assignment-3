@@ -13,6 +13,7 @@ pipeline {
                     if(params.STAGE == 'build')
                     {
                         git branch: params.BRANCH, url: params.GIT_REPO
+                        echo "starting build stage"
                         sh '''
                             #!/bin/bash 
                             pwd 
@@ -28,12 +29,12 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent { label 'slave1' } 
+            agent any
             steps {
                 script {
                     if(params.STAGE == 'deploy')
                     {    
-                        sh 'echo "This is deploy stage"'
+                        sh 'echo "starting deploy stage"'
                         sh 'ls > log-deployfile'
                         sh 'sleep 5'
                         echo "${params.BRANCH}"
