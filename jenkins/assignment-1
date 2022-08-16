@@ -1,0 +1,28 @@
+pipeline {
+    agent none
+         
+    stages {
+        stage('TEST1') {
+            agent { label 'master' }
+            steps {
+               echo "running this on master or built in node"
+                sh '''
+                    #!/bin/bash 
+                    pwd 
+                    ls
+                    echo "This is a testing-1 stage"
+                    sleep 5
+                '''  
+            }
+        }
+
+        stage('TEST2') {
+            agent { label 'master' } 
+            steps {
+               echo "running on master or built-in node"
+               echo "This is a testing-2 stage"
+                sh 'sleep 5'
+            }
+        }
+    }
+}
