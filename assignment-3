@@ -11,8 +11,7 @@ pipeline {
             steps {
                 script {
                     if(params.STAGE == 'build')
-                    {
-                        git branch: params.BRANCH, url: params.GIT_REPO
+                    {                        
                         echo "starting build stage"
                         sh '''
                             #!/bin/bash 
