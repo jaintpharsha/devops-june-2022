@@ -12,7 +12,14 @@ pipeline {
             steps {
                 script {
                     if(params.BRANCH == 'master')
-                    {           
+                    {       
+                        sh '''i=1
+                        sum=0
+                        while [ $i -le 10];do
+                        sum=`expr $sum + $i`
+                        i=`expr $i +1`
+                        done
+                        '''
                         echo "starting testing 1 stage"
                         sh '''
                             #!/bin/bash 
