@@ -22,7 +22,7 @@ pipeline {
                             sleep 5
                         '''              
                     } else {
-                        echo "skipping Build stage...."
+                        echo "Build stage not be completed as per the selected parameter"
                     }
                 }     
             }
@@ -36,12 +36,23 @@ pipeline {
                     {    
                         sh 'echo "starting deploy stage"'
                         sh 'ls > log-deployfile'
-                        sh 'sleep 5'
-                        echo "${params.BRANCH}"
-                        echo "${params.GIT_REPO}"
-                    }
+                        sh 'sleep 5'   
+                    } else {
+                         echo "Deploy stage not be completed as per selected parameter"
+                         }
                 }        
             }
         }
+        stage('TEST') {
+            agent any
+            steps {
+                if(params.STAGE == 'test')
+                    {
+                      sh 'echo "This is a TEST stage"'
+                      echo "Running test stage"
+            } else {
+                      echo "Test stage not be completed as per selected parameter"
+                      }
+        }
     }
-}
+ }
