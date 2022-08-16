@@ -1,33 +1,50 @@
 pipeline {
     agent none
+
     parameters {
-        choice(name: 'BRANCH', choices: ['main','master'], description: 'Select branch to do build')     
-               }
+        choice(name: 'BRANCH', choices: ['main','master'], description: 'Branches from where to build')
+    }
+
     stages {
-        script {
-           if (params.BRANCH == 'master')   
-             stage('TEST1') {
-             agent any
-             steps {
-                 echo "running this on master or built in node"
-                  sh '''
-                    #!/bin/bash 
-                    pwd 
-                    ls
-                    echo "This is a testing-1 stage"
-                    sleep 5
-                '''  
+        stage('Test1') {
+            agent any 
+            steps {
+                script {
+                    if(params.BRANCH == 'master')
+                    {           
+                        echo "starting testing 1 stage"
+                        sh '''
+                            #!/bin/bash 
+                            pwd 
+                            ls > log-buildfile
+                            echo "This is test 1 stage"
+                            sleep 5
+                        '''              
+                    } else {
+                        echo "Build test1 not be completed as per the selected parameter"
+                    }
+                }     
             }
         }
 
-        stage('TEST2') {
-            agent any 
+        stage('Test2') {
+            agent any
             steps {
-               echo "running on master or built-in node"
-               echo "This is a testing-2 stage"
-                sh 'sleep 5'
-            } 
+                script {
+                    if(params.BRANCH == 'master')
+                    {    
+                        sh 'echo "starting deploy stage"'
+                        sh 'ls > log-deployfile'
+                        sh 'sleep 5'   
+                    } else {
+                         echo "TEST-2 stage not be completed as per selected parameter"
+                         }
+                }        
+            }
         }
-    } 
+        
+        }
     }
-    } 
+ }
+ }
+ }
