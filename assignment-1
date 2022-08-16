@@ -21,7 +21,7 @@ pipeline {
                             sleep 5
                         '''              
                     } else {
-                        echo "Build test1 not be completed as per the selected parameter"
+                        echo "test1 not be completed as per the selected parameter"
                     }
                 }     
             }
