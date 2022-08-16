@@ -28,6 +28,7 @@ pipeline {
                 sh 'sleep 5'
             }
         }
+    } 
     } else 
          {
            echo " can not run on any branch except master"
