@@ -20,9 +20,7 @@ pipeline {
                             echo "This is build stage"
                             sleep 5
                         '''              
-                    } else {
-                        echo "Build stage not be completed as per the selected parameter"
-                    }
+                    } 
                 }     
             }
         }
@@ -36,9 +34,7 @@ pipeline {
                         sh 'echo "starting deploy stage"'
                         sh 'ls > log-deployfile'
                         sh 'sleep 5'   
-                    } else {
-                         echo "Deploy stage not be completed as per selected parameter"
-                         }
+                    } 
                 }        
             }
         }
@@ -50,9 +46,7 @@ pipeline {
                       {
                         sh 'echo "This is a TESTING stage"'
                         echo "Running test stage"
-              } else {
-                      echo "Test stage not be completed as per selected parameter"
-                      }
+              } 
         }
     }
  }
