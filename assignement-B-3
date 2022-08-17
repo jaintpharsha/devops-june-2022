@@ -10,7 +10,7 @@ pipeline {
 			steps {
 				script {
 					when { 
-						params.STAGE == 'build' 
+						params.STAGE: 'build' 
 							echo "This is build stage"
 							sleep 5
 						}
@@ -22,7 +22,7 @@ pipeline {
 			steps {
 				script {
 					when {
-						params.STAGE == 'deploy'
+						params.STAGE: 'deploy'
 						echo "This is deploy stage"
 						sleep 5
 						}
@@ -33,7 +33,7 @@ pipeline {
 			steps {
 				script {
 					when {
-						params.STAGE == 'test'
+						params.STAGE: 'test'
 						echo "This is test stage"
 						sleep 5
 						}
