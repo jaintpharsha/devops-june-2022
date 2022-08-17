@@ -1,0 +1,33 @@
+pipeline {
+    agent none
+
+    parameters {
+        choice(name: 'STAGE', choices: ['build','deploy','test'], description: 'Stages to build')
+    }
+
+    stages {
+		script {
+			if (params.STAGE == 'build')
+				stage ('build') {
+					agent any
+					echo "Starting BUILD stage"
+					sleep 5
+					echo "BUILD stage successfull"
+					}
+			if (params.STAGE == 'deploy')
+				stage ('deploy") {
+					agent any
+					echo "Starting DEPLOY stage"
+					sleep 5
+					echo "DEPLOY stage successfull"
+					}
+			if (params.STAGE == 'test')
+				stage ('test") {
+					agent any
+					echo "Starting TEST stage"
+					sleep 5
+					echo "TEST stage successfull"
+					}
+				}
+			}
+		}
