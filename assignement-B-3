@@ -1,4 +1,4 @@
-pipeleine {
+pipeline {
 	agent any	
 	
 	parameters {
