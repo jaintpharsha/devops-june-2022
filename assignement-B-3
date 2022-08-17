@@ -7,27 +7,33 @@ pipeline {
 	
 	stages {
 		stage ('BUILD') {
-			script {
-				when (params.STAGE == 'build') {
-					echo "This is build stage"
-					sleep 5
+			steps {
+				script {
+					when (params.STAGE == 'build') {
+						echo "This is build stage"
+						sleep 5
+						}
 					}
 				}
 			}
 		
 		stage ('DEPLOY') {
-			script {
-				when (params.STAGE == 'deploy') {
-					echo "This is deploy stage"
-					sleep 5
+			steps {
+				script {
+					when (params.STAGE == 'deploy') {
+						echo "This is deploy stage"
+						sleep 5
+						}
 					}
 				}
 			}
 		stage ('TEST') {
-			script {
-				when (params.STAGE == 'test') {
-					echo "This is test stage"
-					sleep 5
+			steps {
+				script {
+					when (params.STAGE == 'test') {
+						echo "This is test stage"
+						sleep 5
+						}
 					}
 				}
 			}
