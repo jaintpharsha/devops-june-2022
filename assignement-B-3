@@ -1,44 +1,35 @@
 pipeline {
-	agent any	
-	
+	agent any
 	parameters {
-        choice(name: 'STAGE', choices: ['build','deploy','test'], description: 'Stages to build')
-    }
-	
-	stages {
-		stage ('BUILD') {
-			steps {
-				script {
-					when { 
-						params.STAGE: 'build' 
-							echo "This is build stage"
-							sleep 5
-						}
-					}
-				}
-			}
-		
-		stage ('DEPLOY') {
-			steps {
-				script {
-					when {
-						params.STAGE: 'deploy'
-						echo "This is deploy stage"
-						sleep 5
-						}
-					}
-				}
-			}
-		stage ('TEST') {
-			steps {
-				script {
-					when {
-						params.STAGE: 'test'
-						echo "This is test stage"
-						sleep 5
-						}
-					}
-				}
-			}
+		choice(choices: ['BUILD', 'DEPLOY', 'TEST'], description: 'Select the stage you want to run', name: 'STAGE')
 		}
-	}
+	stages {
+			stage ('BUILD') {
+		when {
+		expression { params.STAGE == 'BUILD' }
+		}
+		steps {
+			echo "this is build stage"
+			sleep 5
+			}
+		}  
+    stage ('DEPLOY') {
+		when {
+		expression { params.running_stage == 'DEPLOY' }
+		}
+            steps {
+				echo "this is deploy stage"
+				sleep 5
+                }
+              } 
+       stage ('TEST') {
+			when {
+			expression { params.running_stage == 'TEST' }
+        }
+            steps {
+                  echo "this is test stage"
+				  sleep 5
+                }
+			}
+		} 
+    }
