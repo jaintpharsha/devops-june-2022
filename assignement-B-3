@@ -4,27 +4,27 @@ pipeline {
 		choice(choices: ['BUILD', 'DEPLOY', 'TEST'], description: 'Select the stage you want to run', name: 'STAGE')
 		}
 	stages {
-			stage ('BUILD') {
-		when {
-		expression { params.STAGE == 'BUILD' }
-		}
-		steps {
-			echo "this is build stage"
-			sleep 5
+		stage ('BUILD') {
+			when {
+			expression { params.STAGE == 'BUILD' }
 			}
-		}  
-    stage ('DEPLOY') {
-		when {
-		expression { params.running_stage == 'DEPLOY' }
-		}
-            steps {
-				echo "this is deploy stage"
+			steps {
+				echo "this is build stage"
 				sleep 5
+				}
+			}  
+    stage ('DEPLOY') {
+			when {
+			expression { params.STAGE == 'DEPLOY' }
+			}
+				steps {
+					echo "this is deploy stage"
+					sleep 5
                 }
               } 
        stage ('TEST') {
 			when {
-			expression { params.running_stage == 'TEST' }
+			expression { params.STAGE == 'TEST' }
         }
             steps {
                   echo "this is test stage"
