@@ -1,33 +1,35 @@
-pipeline {
-    agent none
-
-    parameters {
+pipeleine {
+	agent any	
+	
+	parameters {
         choice(name: 'STAGE', choices: ['build','deploy','test'], description: 'Stages to build')
     }
-
-    stages {
-		script {
-			if (params.STAGE == 'build')
-				stage ('build') {
-					agent any
-					echo "Starting BUILD stage"
+	
+	stages {
+		stage ('BUILD') {
+			script {
+				when (params.STAGE == 'build') {
+					echo "This is build stage"
 					sleep 5
-					echo "BUILD stage successfull"
 					}
-			if (params.STAGE == 'deploy')
-				stage ('deploy') {
-					agent any
-					echo "Starting DEPLOY stage"
+				}
+			}
+		
+		stage ('DEPLOY') {
+			script {
+				when (params.STAGE == 'deploy') {
+					echo "This is deploy stage"
 					sleep 5
-					echo "DEPLOY stage successfull"
 					}
-			if (params.STAGE == 'test')
-				stage ('test') {
-					agent any
-					echo "Starting TEST stage"
+				}
+			}
+		stage ('TEST') {
+			script {
+				when (params.STAGE == 'test') {
+					echo "This is test stage"
 					sleep 5
-					echo "TEST stage successfull"
 					}
 				}
 			}
 		}
+	}
