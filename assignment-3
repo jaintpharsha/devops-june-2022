@@ -20,7 +20,9 @@ pipeline {
                             echo "This is build stage"
                             sleep 5
                         '''              
-                    } 
+                    } else {
+				    echo "Skipping build stage as per the given parameter"
+				    }
                 }     
             }
         }
@@ -34,8 +36,10 @@ pipeline {
                         sh 'echo "starting deploy stage"'
                         sh 'ls > log-deployfile'
                         sh 'sleep 5'   
-                    } 
-                }        
+                    } else {
+				    echo "Skipping deploy stage as per the given parameter"
+				    }  
+                }      
             }
         }
         stage('TEST') {
@@ -46,7 +50,9 @@ pipeline {
                       {
                         sh 'echo "This is a TESTING stage"'
                         echo "Running test stage"
-              } 
+              } else {
+				    echo "Skipping test stage as per the given parameter"
+				    }  
         }
     }
  }
