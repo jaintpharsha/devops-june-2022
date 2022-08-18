@@ -1,0 +1,131 @@
+Docker 
+	Docker is one of the tools that used the idea of the isolated resources to 
+	create a container that allows applications to be packaged with all the 
+	dependencies installed and ran wherever we wanted.
+	
+	Docker can only run on Linux machines this means I cant install Dokcer directly on Windows or any other OS.
+	If I want install Docker on windows then I need to run a Linux VM in windows on top that I need to run Docker.
+
+Virtualization (VM)
+	- VM is way of running virtual OS on top a host OS using a special software called Hyperviser.
+	- VM directly shares the harware of the host OS. 
+
+					VM 					vs 			Containerisation 
+	1. Virtualization at hardware level  		1. Virtualization at OS level 
+	2. Heavyweight - consume more host 			2. Lightweight
+	   resources 	
+	3. VM useses hypervisor 					3. containerisation tool is used 
+	4. limited performace - Boot up time        4. Native performace - usualy boot 
+		is more which is in minutes 			   fast in seconds.
+	5. Cosumes more storage 					5. Shres OS storage means only uses 
+												   required storage.
+	6. Supports all OS 							6. Supports on Linux
+
+host machine 
+	This is the machine in which docker is running 
+
+Docker installation
+
+1. Update ubuntu 
+	sudo apt update 
+
+2. Install support packages for Docker
+	sudo apt-get install -y ca-certificates curl gnupg lab-release
+
+3. Need add key to download Docker 
+	sudo mkdir -p /etc/apt/keyrings
+	
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg	
+
+4. Add docker packages to apt repository 
+	echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+5. Install Docker 
+	sudo apt-get update
+ 	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+
+Assignment: 1. Create docker hub account 
+
+Login to your hub account 
+	docker login 
+
+Just try 
+	STEP 1: create directory in /home/ubuntu/jenkins_home 
+	STEP 2: docker run -it -d -p 8080:8080 -p 50000:50000 -v /home/ubuntu/jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+
+
+Docker images 
+	
+To Download a images from docker hub / any registry 
+	docker pull <image_name>:<tag>
+	note: 1. The default tag will be always latest.
+	      2. if we wont specify any tag latest will be considered 
+To Delete docker image/images
+	docker rmi <image1> <image2> .....
+
+To Delete all the local images 
+	docker images -q | xargs -I{} docker rmi "{}"
+	docker rmi $(docker images -q)
+
+To push a image to your repo 
+
+		1. Create a tag which matches your repo syntax 
+			docker tag <old_name> <new_name>
+			
+			ex: docker tag ubuntu:22.10 harshajain/test:1.0
+		
+		2. Push the image 	
+			docoker push <username>/<image_name>:<tag>	
+		
+			ex: docker push harshajain/test:1.0
+
+
+Docker container 
+	A container is a set of isolated processes and resources. Linux achieves 
+	this by using namespaces, which allows processes to access only resources 
+	in that particular namespace, which allows having a process tree means set 
+	of processes that is completely independent of the rest of the systems processes.
+	
+	Docker definition: A container is a standard unit of software that packages 
+	up code and all its dependencies so the application runs quickly and reliably 
+	from one computing environment to another.
+
+To list all running containers 
+	docker ps
+	docker container ls 
+
+To list all the containers (running, paused, stopped)
+	docker ps 
+	docker container ls -a
+
+To delete a container 
+	docker rm <conatiner_id>
+	docker container rm <container_id>
+
+To stop all running containers 
+	docker stop $(docker ps -q)
+
+To delete all stopped containers 
+	docker rm $(docker ps --filter "status=exited" -q)
+
+To create a container from a image 
+	docker run -it -d --name <container_name> <image_repo>:<tag>
+
+	Note:	-i: Interactive mode
+		-t: tty terminal 
+		-d: detached mode (creates container in background)
+		--name: The name for the container to be created
+		1. Always provide image name at the end of the command 
+
+
+
+
+
+
+
+
+
+
