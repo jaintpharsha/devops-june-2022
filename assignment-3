@@ -1,0 +1,60 @@
+pipeline {
+    agent none
+
+    parameters {
+        choice(name: 'STAGE', choices: ['build','deploy','test'], description: 'Stages to build')
+    }
+
+    stages {
+        stage('Build') {
+            agent any 
+            steps {
+                script {
+                    if(params.STAGE == 'build')
+                    {                        
+                        echo "starting build stage"
+                        sh '''
+                            #!/bin/bash 
+                            pwd 
+                            echo "Starting build stage"
+                            echo "This is build stage"
+                            sleep 5
+                        '''              
+                    } else {
+				    echo "Skipping build stage as per the given parameter"
+				    }
+                }     
+            }
+        }
+
+        stage('Deploy') {
+            agent any
+            steps {
+                script {
+                    if(params.STAGE == 'deploy')
+                    {    
+                        sh 'echo "starting deploy stage"'
+                        sh 'ls > log-deployfile'
+                        sh 'sleep 5'   
+                    } else {
+				    echo "Skipping deploy stage as per the given parameter"
+				    }  
+                }      
+            }
+        }
+        stage('TEST') {
+            agent any
+            steps {
+                script {
+                  if(params.STAGE == 'test')
+                      {
+                        sh 'echo "This is a TESTING stage"'
+                        echo "Running test stage"
+              } else {
+				    echo "Skipping test stage as per the given parameter"
+				    }  
+        }
+    }
+ }
+ }
+ }

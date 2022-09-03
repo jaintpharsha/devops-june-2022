@@ -1,0 +1,59 @@
+pipeline {
+    agent none
+
+    parameters {
+        choice(name: 'BRANCH', choices: ['main','master'], description: 'Branches from where to build')
+    }
+    stages {   
+     stage ('Testing') {
+       parallel {       
+        stage('Test1') {
+            agent any 
+            steps {
+                script {
+                    if(params.BRANCH == 'master')
+                    {       
+                        sh '''
+                        #!/bin/bash
+                        i=1
+                        sum=0
+                        while [ $i -le 10];do
+                        sum=`expr $sum + $i`
+                        i=`expr $i + 1`
+                        done
+                        echo "$sum"
+                        '''
+                        echo "starting testing 1 stage"
+                        sh '''
+                            #!/bin/bash 
+                            pwd 
+                            ls > log-buildfile
+                            echo "This is test 1 stage"
+                            sleep 5
+                        '''              
+                    } else {
+                        echo "test1 not be completed as per the selected parameter"
+                    }
+                }     
+            }
+        }
+
+        stage('Test2') {
+            agent any
+            steps {
+                script {
+                    if(params.BRANCH == 'master')
+                    {    
+                        sh 'echo "starting deploy stage"'
+                        sh 'ls > log-deployfile'
+                        sh 'sleep 5'   
+                    } else {
+                         echo "TEST-2 stage not be completed as per selected parameter"
+                         }
+                }        
+            }
+        }
+        }
+        }
+    }
+    }

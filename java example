@@ -1,6 +1,6 @@
 pipeline {
-    agent any
-     stages {
+    agent { label 'master' }
+    stages {
         stage('Build') {
             steps {
                     git branch: 'master', url: 'https://github.com/jenkins-docs/simple-java-maven-app.git'

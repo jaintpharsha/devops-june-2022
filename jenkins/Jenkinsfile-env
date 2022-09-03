@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         BRANCH = 'main'
-        GIT_REPO = 'https://github.com/jaintpharsha/devops-june-2022.git'
+        GIT_REPO = 'https://github.com/RajatHegde123/devops-june-2022'
     }
 
     stages {
@@ -30,7 +30,6 @@ pipeline {
                 echo "This is a DEPLOY stage"
                 sh 'sleep 5'
                 echo "$BRANCH $GIT_REPO"
-                echo "$BUILD_ENV"
             }
         }
     }
